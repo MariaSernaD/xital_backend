@@ -14,10 +14,12 @@ const productSchema = new mongoose.Schema(
     unitPrice: {
       type: Number,
       required: true,
+      min: 0,
     },
     stock: {
       type: Number,
       default: 0,
+      min: 0,
     },
     imageURL: {
       type: String,

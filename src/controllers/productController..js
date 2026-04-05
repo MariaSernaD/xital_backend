@@ -1,7 +1,7 @@
 import express from "express";
 import Product from "./models/Product.js";
 
-//conseguir todos los productos disponibles,en caso que no haya se enviará un mensaje de actualización al usuario
+//trae todos los productos disponibles,en caso que no haya se enviará un mensaje de actualización de catálogo al usuario
 const getProducts = async (req, res) => {
   try {
     const products = await Product.find().populate("category");
@@ -19,16 +19,50 @@ const getProducts = async (req, res) => {
 };
 
 const getProductById = async (req, res) => {
-    try {
-        const {id} = req.params;
-        const product = await Product.findById(id).populate("category");
-    } catch (error) {
-        console.log(error);
-        res.status(500).send({message: "Internal Server Error"});
+  try {
+    const { id } = req.params;
+    const product = await Product.findById(id).populate("category");
+    if (!product) {
+      return res.status(404).send({ message: "Product not found" });
     }
+    res.status(200).json(product);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
 };
 
-const createProduct = async (req, res) => {};
+//solo el admin tiene el derecho de crear un producto, por lo que se debe autenticar con su rol para hacerlo
+const createProduct = async (req, res) => {
+  try {
+    const {
+      name,
+      description,
+      unitPrice,
+      stock,
+      imageURL,
+      fungus,
+      volume,
+      category,
+    } = req.body;
+    const newProduct = await Product.create({name,
+      description,
+      unitPrice,
+      stock,
+      imageURL,
+      fungus,
+      volume,
+      category});
+      if(!newProduct){
+        return res.status(400).send({message:"Failed to create product"});
+      }
+      await newProduct.populate("category");
+      res.status(201).json(newProduct);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+};
 
 const updateProduct = async (req, res) => {};
 
