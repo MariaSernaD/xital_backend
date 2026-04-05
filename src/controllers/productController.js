@@ -1,17 +1,13 @@
-import express from "express";
-import Product from "./models/Product.js";
+import Product from "../models/Product.js";
 
 //trae todos los productos disponibles,en caso que no haya se enviará un mensaje de actualización de catálogo al usuario
 const getProducts = async (req, res) => {
   try {
     const products = await Product.find().populate("category");
-    if (products.length === 0) {
-      return res
-        .status(404)
-        .send({ message: "We are updating the products, wait for them" });
-    } else {
-      res.status(200).json(products);
-    }
+    res.status(200).json({
+      products,
+      message: products.length === 0 ? "We are updating the products, wait for them" : null,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send({ message: "Internal Server Error" });
@@ -104,7 +100,19 @@ const updateProduct = async (req, res) => {
   }
 };
 
-const deleteProduct = async (req, res) => {};
+const deleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteProduct = await Product.findByIdAndDelete(id);
+    if (!deleteProduct) {
+      return res.status(404).send({ message: "Product not found" });
+    }
+    res.status(200).json({ message: "Product deleted successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+};
 
 export {
   getProducts,
