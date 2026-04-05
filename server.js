@@ -1,0 +1,24 @@
+import express from 'express';
+import connectDB from './src/config/db.config.js';
+import routes from './src/routes/index.js';
+import dotenv from 'dotenv';
+dotenv.config();
+
+//1. Conectarse a la base de datos
+const app = express();
+const PORT = process.env.PORT || 3000;
+app.use(express.json());
+
+connectDB();
+
+//2.Definición de la ruta principal
+app.use("/api", routes);
+app.get('/', (req, res)=> {
+    res.send("API is working successfully");
+});
+
+
+//2.Escucha del puerto
+app.listen(PORT, ()=>{
+    console.log( `Server running on http://localhost:${PORT}`); 
+});
