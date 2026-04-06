@@ -18,7 +18,7 @@ app.get('/', (req, res)=> {
 });
 
 
-//2.Escucha del puerto
+//3.Escucha del puerto
 app.listen(PORT, ()=>{
     console.log( `Server running on http://localhost:${PORT}`); 
 });
