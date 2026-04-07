@@ -15,7 +15,7 @@ const categorySchema = new mongoose.Schema(
     imageURL: {
       type: String,
       required: true,
-      default: "https://via.placeholder.com/150",
+      default: "https://placehold.co/800x600.png",
     },
     parentCategory: {
       type: mongoose.Schema.Types.ObjectId,
