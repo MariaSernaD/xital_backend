@@ -1,6 +1,6 @@
 import Wishlist from "../models/Wishlist.js";
 
-const getWishLists = async (req, res) => {
+const getWishlists = async (req, res) => {
   try {
     const wishlists = await Wishlist.find()
       .populate("user")
@@ -107,7 +107,7 @@ const deleteWishlist = async (req, res) => {
 };
 
 export {
-  getWishLists,
+  getWishlists,
   getUserWishlist,
   createWishlist,
   addProductToWishlist,
