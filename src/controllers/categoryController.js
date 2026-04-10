@@ -3,7 +3,7 @@ import Category from "../models/Category.js";
 const getProductCategories = async (req, res) => {
   try {
     const categories = await Category.find().populate("parentCategory");
-    res.status(200).json(categories);
+    res.status(200).json({categories, message: "This place is still empty, wait for the categories"});
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "Internal Server Error" });

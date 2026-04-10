@@ -32,6 +32,7 @@ const productSchema = new mongoose.Schema(
         "Cordyceps: C. sinensis",
         "Cola de pavo: T. versicolor",
         "Melena de León: H. erinaceus",
+        "Reishi: G. lucidum",
       ],
     },
     volume: {

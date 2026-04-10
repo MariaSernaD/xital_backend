@@ -1,5 +1,7 @@
 import Product from "../models/Product.js";
 
+//FALTA EL SEARCH DEL PRODUCTO POR NOMBRE, DESCRIPCIÓN O CATEGORÍA
+
 //trae todos los productos disponibles,en caso que no haya se enviará un mensaje de actualización de catálogo al usuario
 const getProducts = async (req, res) => {
   try {

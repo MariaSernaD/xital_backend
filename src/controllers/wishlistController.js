@@ -59,6 +59,7 @@ const addProductToWishlist = async (req, res) => {
     if (alreadyAdded) {
       return res.status(200).json({ message: "Product already in wishlist" });
     }
+    //dentro de la wishlist, se agrega un nuevo producto al array de productos, con el id del producto
     wishlist.products.push({ product: productId });
     await wishlist.save();
     await wishlist.populate("user");
@@ -79,7 +80,7 @@ const removeProductFromWishlist = async (req, res) => {
     if (!wishlist) {
       return res.status(404).json({ message: "Wishlist not found" });
     }
-    //el filtro devuelve un nuevo array sin el producto que queremos eliminar
+    //el filtro devuelve un nuevo array SIN el producto que queremos eliminar
     wishlist.products = wishlist.products.filter(
       (p) => p.product.toString() !== productId,
     );
