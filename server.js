@@ -17,6 +17,7 @@ app.get("/", (req, res) => {
 });
 app.use("/api", routes);
 
+//2.1 Middleware para manejar rutas no encontradas
 app.use((req, res) => {
   res.status(404).json({
     error: "Route not found",
