@@ -31,7 +31,7 @@ const register = async (req, res) => {
     //verificar si el usuario existe
     const existingUser = await verifyUserExists(email);
     if (existingUser) {
-     return res.status(400).json({ message: "User is already exists" });
+     return res.status(400).json({ message: "User already exists" });
     }
 
     const hashPassword = await generatePassword(password);

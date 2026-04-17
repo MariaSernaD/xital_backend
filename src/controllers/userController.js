@@ -13,7 +13,7 @@ const getUsers = async (req, res) => {
     res.status(200).json(users);
   } catch (error) {
     console.log(error);
-    res.status(500).json("Internal Server Error");
+    res.status(500).json({message: "Internal Server Error"});
   }
 };
 
@@ -22,12 +22,12 @@ const getUserById = async (req, res) => {
     const { id } = req.params;
     const user = await User.findById(id).select("-password");
     if (!user) {
-      return res.status(404).send("User not found");
+      return res.status(404).json({message: "User not found"});
     }
     res.status(200).json(user);
   } catch (error) {
     console.log(error);
-    res.status(500).json("Internal Server Error");
+    res.status(500).json({message: "Internal Server Error"});
   }
 };
 
@@ -48,7 +48,7 @@ const createUser = async (req, res) => {
     res.status(201).json(userResponse);
   } catch (error) {
     console.log(error);
-    res.status(500).json("Internal Server Error");
+    res.status(500).json({message: "Internal Server Error"});
   }
 };
 
