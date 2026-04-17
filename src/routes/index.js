@@ -5,11 +5,13 @@ import categoryRoutes from '../routes/categoryRoutes.js';
 import wishlistRoutes from '../routes/wishlistRoutes.js';
 import userRoutes from '../routes/userRoutes.js';
 import addressRoutes from '../routes/addressRoutes.js';
+import paymentMethodRoutes from '../routes/paymentMethodRoutes.js';
 
 const router = express.Router();
 router.use("/auth", authRoutes);
 router.use(productRoutes);
 router.use(categoryRoutes);
+router.use(paymentMethodRoutes);
 router.use(wishlistRoutes);
 router.use(userRoutes);
 router.use(addressRoutes);
