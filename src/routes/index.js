@@ -7,6 +7,7 @@ import userRoutes from '../routes/userRoutes.js';
 import addressRoutes from '../routes/addressRoutes.js';
 import paymentMethodRoutes from '../routes/paymentMethodRoutes.js';
 import orderRoutes from '../routes/orderRoutes.js';
+import reviewsRoutes from '../routes/reviewRoutes.js';
 
 const router = express.Router();
 router.use("/auth", authRoutes);
@@ -17,6 +18,7 @@ router.use(wishlistRoutes);
 router.use(userRoutes);
 router.use(addressRoutes);
 router.use(orderRoutes);
+router.use(reviewsRoutes);
 
 
 export default router;
