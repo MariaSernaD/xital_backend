@@ -8,17 +8,19 @@ import addressRoutes from '../routes/addressRoutes.js';
 import paymentMethodRoutes from '../routes/paymentMethodRoutes.js';
 import orderRoutes from '../routes/orderRoutes.js';
 import reviewsRoutes from '../routes/reviewRoutes.js';
+import cartRoutes from '../routes/cartRoutes.js';
 
 const router = express.Router();
 router.use("/auth", authRoutes);
-router.use(productRoutes);
+router.use( productRoutes);
 router.use(categoryRoutes);
-router.use(paymentMethodRoutes);
-router.use(wishlistRoutes);
-router.use(userRoutes);
+router.use( paymentMethodRoutes);
+router.use( wishlistRoutes);
+router.use( userRoutes);
 router.use(addressRoutes);
 router.use(orderRoutes);
-router.use(reviewsRoutes);
+router.use( reviewsRoutes);
+router.use(cartRoutes);
 
 
 export default router;
