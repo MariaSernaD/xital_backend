@@ -2,7 +2,7 @@
 
 > *Xital: palabra maya que significa **vida** o **alma**.*
 
-API REST para una tienda en línea especializada en **tinturas de hongos adaptógenos** cultivados de forma artesanal y con doble extracción (agua y alcohol para extraer los elementos necesarios y adecuados que te ayudaran a sentirte mejor). Los productos incluyen las variedades más reconocidas: Reishi, Cola de pavo, Melena de León y Cordyceps, disponibles en presentaciones de 30, 50 y 100 ml.
+API REST para una tienda en línea especializada en **tinturas de hongos adaptógenos** cultivados de forma artesanal y con doble extracción (agua y alcohol para extraer los elementos/compuestos necesarios y adecuados que te ayudaran a sentirte mejor). Los productos incluyen las variedades más reconocidas: Reishi, Cola de pavo, Melena de León y Cordyceps, disponibles en presentaciones de 30, 50 y 100 ml.
 
 Este proyecto es el backend de un e-commerce funcional, desarrollado con Node.js, Express y MongoDB. Implementa autenticación segura con JWT, validación de datos y una arquitectura modular organizada por responsabilidades.
 
@@ -277,7 +277,8 @@ Este proyecto es parte de un ejercicio académico de desarrollo backend. Funcion
 - [x] CRUD de usuarios
 - [x] Gestión de carrito
 - [x] CRUD de address
-- [ ] Pruebas pendientes: wishlist, payment-method, order, reviews
+- [x] CRUD de reviews
+- [ ] Pruebas pendientes: wishlist, payment-method, order
 - [ ] Middleware `isAdmin` para protección de rutas administrativas
 
 ---
