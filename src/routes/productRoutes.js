@@ -1,5 +1,6 @@
 import express from "express";
 import authMiddleware from "../middlewares/authMiddleware.js";
+import isAdmin from '../middlewares/isAdminMiddleware.js';
 import {
   getProducts,
   getProductById,
@@ -12,8 +13,8 @@ const router = express.Router();
 
 router.get('/products', getProducts );
 router.get('/products/:id', getProductById);
-router.post('/products/', authMiddleware, createProduct );
-router.put('/products/:id', authMiddleware, updateProduct);
-router.delete('/products/:id', authMiddleware, deleteProduct);
+router.post('/products/', authMiddleware, isAdmin, createProduct );
+router.put('/products/:id', authMiddleware, isAdmin, updateProduct);
+router.delete('/products/:id', authMiddleware, isAdmin, deleteProduct);
 
 export default router;

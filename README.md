@@ -221,12 +221,12 @@ La URL base para todos los endpoints es: `http://localhost:3000/api`
 
 | Método | Endpoint | Auth | Descripción |
 |---|---|---|---|
-| GET | `/wishlist` | ❌ | Obtener todas las wishlists |
-| GET | `/wishlist/:id` | ❌ | Obtener wishlist de usuario |
-| POST | `/wishlist` | ❌ | Crear wishlist |
-| PUT | `/wishlist/:id` | ❌ | Agregar producto a wishlist |
-| PUT | `/wishlist/:id` | ❌ | Eliminar producto de wishlist |
-| DELETE | `/wishlist/:id` | ❌ | Eliminar wishlist |
+| GET | `/wishlist` | 🔒 | Obtener todas las wishlists |
+| GET | `/wishlist/:id` | 🔒 | Obtener wishlist de usuario |
+| POST | `/wishlist` | 🔒 | Crear wishlist |
+| PUT | `/wishlist/:id` | 🔒 | Agregar producto a wishlist |
+| PUT | `/wishlist/:id` | 🔒| Eliminar producto de wishlist |
+| DELETE | `/wishlist/:id` | 🔒 | Eliminar wishlist |
 
 ---
 
@@ -279,9 +279,11 @@ Este proyecto es parte de un ejercicio académico de desarrollo backend. Funcion
 - [x] CRUD de address
 - [x] CRUD de reviews
 - [x] CRUD de wishlist
-- [ ] Pruebas pendientes: payment-method, order
-- [ ] Middleware `isAdmin` para protección de rutas administrativas
-
+- [x] CRUD de payment-method
+- [x] CRUD de orders
+- [x] Middleware `isAdmin` para protección de rutas administrativas
+- [] Faltantes: manejo de errores(errorHandler y netx(error)), validaciones (express-validator), paginación
+(getProducts)
 ---
 
 ## 👩‍💻 Autora
