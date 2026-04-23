@@ -1,4 +1,5 @@
 import express from 'express';
+import authMiddleware from '../middlewares/authMiddleware.js';
 import { getWishlists,
   getUserWishlist,
   createWishlist,
@@ -8,11 +9,11 @@ import { getWishlists,
 
   const router = express.Router();
 
-  router.get('/wishlist', getWishlists);
-  router.get('/wishlist/:id', getUserWishlist);
-  router.post('wishlist', createWishlist);
-  router.put('/wishlist/:id', addProductToWishlist);
-  router.put('/wishlist/:id', removeProductFromWishlist);
-  router.delete('wishlist/:id', deleteWishlist);
+  router.get('/wishlist', authMiddleware, getWishlists);
+  router.get('/wishlist/:id', authMiddleware, getUserWishlist);
+  router.post('/wishlist', authMiddleware, createWishlist);
+  router.put('/wishlist/product', authMiddleware, addProductToWishlist);
+  router.delete('/wishlist/:id/product', authMiddleware, removeProductFromWishlist);
+  router.delete('/wishlist/:id', authMiddleware, deleteWishlist);
 
   export default router;

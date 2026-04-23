@@ -14,8 +14,8 @@ const getWishlists = async (req, res) => {
 
 const getUserWishlist = async (req, res) => {
   try {
-    const { id } = req.params;
-    const wishlistByUserId = await Wishlist.findOne({ user: id })
+    const userId = req.params.userId;
+    const wishlistByUserId = await Wishlist.findOne({ user: userId })
       .populate("user")
       .populate("products.product");
     if (!wishlistByUserId) {
@@ -30,7 +30,7 @@ const getUserWishlist = async (req, res) => {
 
 const createWishlist = async (req, res) => {
   try {
-    const { userId } = req.body;
+    const  userId  = req.user.userId;
     // Si ya existe una wishlist, no crear otra
     const wishlistExists = await Wishlist.findOne({ user: userId });
     if (wishlistExists) {
@@ -47,20 +47,21 @@ const createWishlist = async (req, res) => {
 
 const addProductToWishlist = async (req, res) => {
   try {
-    const { userId, productId } = req.body;
+    const userId = req.user.userId;
+    const {product} = req.body;
 
     const wishlist = await Wishlist.findOne({ user: userId });
     if (!wishlist) {
       return res.status(404).json({ message: "Wishlist not found" });
     }
     const alreadyAdded = wishlist.products.some(
-      (p) => p.product.toString() === productId,
+      (p) => p.product.toString() === product,
     );
     if (alreadyAdded) {
       return res.status(200).json({ message: "Product already in wishlist" });
     }
     //dentro de la wishlist, se agrega un nuevo producto al array de productos, con el id del producto
-    wishlist.products.push({ product: productId });
+    wishlist.products.push({ product});
     await wishlist.save();
     await wishlist.populate("user");
     await wishlist.populate("products.product");
@@ -74,9 +75,10 @@ const addProductToWishlist = async (req, res) => {
 
 const removeProductFromWishlist = async (req, res) => {
   try {
+    //este id es el de la wishlist que va en el endpoint
     const { id } = req.params;
     const { productId } = req.body;
-    const wishlist = await Wishlist.findById(id);
+    const wishlist = await Wishlist.findOne({_id: id, user: req.user.userId});
     if (!wishlist) {
       return res.status(404).json({ message: "Wishlist not found" });
     }
@@ -96,7 +98,7 @@ const removeProductFromWishlist = async (req, res) => {
 const deleteWishlist = async (req, res) => {
   try {
     const {id}= req.params;
-    const wishlist = await Wishlist.findByIdAndDelete(id);
+    const wishlist = await Wishlist.findOneAndDelete({_id: id, user: req.user.userId});
     if(!wishlist){
       return res.status(404).json({ message: "Wishlist not found" });
     }

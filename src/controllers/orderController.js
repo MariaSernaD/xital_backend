@@ -52,11 +52,7 @@ const createOrder = async (req, res) => {
       shippingCost,
       statusOrder: "pending",
     });
-    await newOrder
-      .populate("user")
-      .populate("products.product")
-      .populate("address")
-      .populate("paymentMethod");
+    await newOrder.populate(["user", "products.product", "address", "paymentMethod"]);
     res.status(201).json(newOrder);
   } catch (error) {
     console.log(error);
@@ -68,11 +64,7 @@ const updateOrder = async (req, res) => {
   try {
     const { id } = req.params;
     const userId = req.user.userId;
-    const {
-      products,
-      address,
-      paymentMethod,
-    } = req.body;
+    const { products, address, paymentMethod } = req.body;
     //verificar que la orden exista y que el usuario sea el dueño de la orden, si no existe o el usuario no es el dueño, retornar un error
     const orderIsExist = await Order.findOne({ _id: id, user: userId });
     if (!orderIsExist) {
@@ -85,7 +77,8 @@ const updateOrder = async (req, res) => {
       statusOrder: "pending",
     };
 
-    const updateOrder = await Order.findOneAndUpdate(filterOrderByStatus,
+    const updateOrder = await Order.findOneAndUpdate(
+      filterOrderByStatus,
       {
         products,
         address,
@@ -93,10 +86,7 @@ const updateOrder = async (req, res) => {
       },
       { new: true, runValidators: true },
     )
-      .populate("user")
-      .populate("products.product")
-      .populate("address")
-      .populate("paymentMethod");
+      .populate(["user", "products.product", "address", "paymentMethod"]);
 
     if (!updateOrder) {
       return res.status(400).json({
@@ -110,4 +100,4 @@ const updateOrder = async (req, res) => {
   }
 };
 
-export { getOrders, getOrderById, createOrder, updateOrder };
+export { getOrders, getOrderById, createOrder, updateOrder};

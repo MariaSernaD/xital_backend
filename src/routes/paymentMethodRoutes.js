@@ -12,7 +12,7 @@ const router = express.Router();
 router.get('/payment-method', authMiddleware,  getPaymentMethods);
 router.get('/payment-method/:id', authMiddleware, getPaymentMethodById);
 router.post('/payment-method', authMiddleware, createPaymentMethod);
-router.put('/payment-method',authMiddleware , updatePaymentMethod);
-router.delete('/payment-method', authMiddleware, deletePaymentMethod);
+router.put('/payment-method/:id',authMiddleware , updatePaymentMethod);
+router.delete('/payment-method/:id', authMiddleware, deletePaymentMethod);
 
 export default router;

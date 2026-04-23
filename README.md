@@ -278,7 +278,8 @@ Este proyecto es parte de un ejercicio académico de desarrollo backend. Funcion
 - [x] Gestión de carrito
 - [x] CRUD de address
 - [x] CRUD de reviews
-- [ ] Pruebas pendientes: wishlist, payment-method, order
+- [x] CRUD de wishlist
+- [ ] Pruebas pendientes: payment-method, order
 - [ ] Middleware `isAdmin` para protección de rutas administrativas
 
 ---
