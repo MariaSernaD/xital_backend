@@ -73,14 +73,6 @@ Copia el archivo de ejemplo y rellena tus valores:
 cp .env.example .env
 ```
 
-Contenido del `.env`:
-
-```env
-PORT=3000
-MONGO_URI=mongodb://localhost:27017/xital-db
-JWT_SECRET=tu_clave_secreta_aqui
-```
-
 4. **Asegúrate de que MongoDB esté corriendo** en tu máquina local (puedes verificarlo desde MongoDB Compass).
 
 5. **Inicia el servidor**
@@ -282,14 +274,13 @@ Este proyecto es parte de un ejercicio académico de desarrollo backend. Funcion
 - [x] CRUD de payment-method
 - [x] CRUD de orders
 - [x] Middleware `isAdmin` para protección de rutas administrativas
-- [] Faltantes: manejo de errores(errorHandler y netx(error)), validaciones (express-validator), paginación
-(getProducts)
+- [] Faltantes: manejo de errores(errorHandler y next(error)), validaciones (express-validator), paginación.
 ---
 
 ## 👩‍💻 Autora
 
 **María G. Serna Domínguez**
-Bióloga Molecular | Yogui | Desarrolladora en formación
+Bióloga Molecular | Yogini | Desarrolladora en formación
 
 Especialista en micología, bioinformática y reconstrucciones filogenéticas. Con la misma metodología que se aplica al estudio de hongos entomopatógenos —observación, iteración y paciencia— aprendiendo a construir sistemas backend.
 
