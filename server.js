@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import connectDB from "./src/config/db.config.js";
 import routes from "./src/routes/index.js";
@@ -7,6 +8,12 @@ dotenv.config();
 //1. Conectarse a la base de datos
 const app = express();
 const PORT = process.env.PORT || 4000;
+
+app.use(cors({
+  origin: "http://localhost:5173", // Reemplaza con la URL de tu frontend
+  credentials: true,
+}));
+
 app.use(express.json());
 
 connectDB();

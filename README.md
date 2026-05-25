@@ -109,7 +109,7 @@ El proyecto cuenta con los siguientes modelos principales y sus relaciones:
 
 ## 🔌 Endpoints de la API
 
-La URL base para todos los endpoints es: `http://localhost:3000/api`
+La URL base para todos los endpoints es: `http://localhost:4000/api`
 
 > 🔒 Los endpoints marcados con este candado requieren un token JWT válido en el header:
 > `Authorization: Bearer <token>`
