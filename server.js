@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 app.use(cors({
-  origin: "http://localhost:5173", // Reemplaza con la URL de tu frontend
+  origin: "http://localhost:5173", 
   credentials: true,
 }));
 
@@ -33,7 +33,7 @@ app.use((req, res) => {
   });
 });
 
-//3.Escucha del puerto
+//3.Puerto
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
