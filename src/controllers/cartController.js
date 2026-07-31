@@ -26,7 +26,10 @@ const getUserCart = async (req, res) => {
     const userId = req.user.userId;
     const cart = await Cart.findOne({ user: userId })
       .populate("user")
-      .populate("products.product");
+      .populate({
+        path: "products.product",
+        populate: { path: "category" },
+      });
     if (!cart) {
       return res.status(404).json({ message: "Cart not found" });
     }
@@ -80,7 +83,10 @@ const addProductToCart = async (req, res) => {
       await isCartExists.save();
     }
     await isCartExists.populate("user");
-    await isCartExists.populate("products.product");
+    await isCartExists.populate({
+      path: "products.product",
+      populate: { path: "category" },
+    });
     res.status(200).json(isCartExists);
   } catch (error) {
     console.log(error);
@@ -113,7 +119,10 @@ const updateProductFromCart = async (req, res) => {
     }
     await cart.save();
     await cart.populate("user");
-    await cart.populate("products.product");
+    await cart.populate({
+      path: "products.product",
+      populate: { path: "category" },
+    });
     res.status(200).json(cart);
   } catch (error) {
     console.log(error);
@@ -136,10 +145,13 @@ const deleteProductFromCart = async (req, res) => {
       return res.status(404).json({ message: "Product not found in cart" });
     }
     // Eliminar el producto del carrito utilizando pull para eliminar el subdocumento completo
-    cart.products.pull({_id: productInCart._id});
+    cart.products.pull({ _id: productInCart._id });
     await cart.save();
     await cart.populate("user");
-    await cart.populate("products.product");
+    await cart.populate({
+      path: "products.product",
+      populate: { path: "category" },
+    });
     res.status(200).json(cart);
   } catch (error) {
     console.log(error);
@@ -156,7 +168,7 @@ const clearCart = async (req, res) => {
     // Vaciar el carrito estableciendo el array de productos a vacío, lo que eliminará todos los subdocumentos de productos en el carrito
     cart.products = [];
     await cart.save();
-    res.status(200).json({message: "Tu carrito está vacío"})
+    res.status(200).json({ message: "Tu carrito está vacío" });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal Server Error" });
