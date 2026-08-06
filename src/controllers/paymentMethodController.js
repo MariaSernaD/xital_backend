@@ -2,7 +2,8 @@ import paymentMethod from "../models/paymentMethod.js";
 
 const getPaymentMethods = async (req, res) => {
   try {
-    const paymentMethods = await paymentMethod.find().populate("user");
+    const userId = req.user.userId;
+    const paymentMethods = await paymentMethod.find({user: userId});
     res.status(200).json(paymentMethods);
   } catch (error) {
     console.log(error);
@@ -13,9 +14,10 @@ const getPaymentMethods = async (req, res) => {
 const getPaymentMethodById = async (req, res) => {
   try {
     const { id } = req.params;
-    const paymentMethodId = await paymentMethod.findById(id).populate("user");
+    const userId = req.user.userId;
+    const paymentMethodId = await paymentMethod.findOne({_id: id, user: userId});
     if (!paymentMethodId) {
-      return res.status(404).json({ message: "Paymentmenthod not found" });
+      return res.status(404).json({ message: "PaymentMethod not found" });
     }
     res.status(200).json(paymentMethodId);
   } catch (error) {

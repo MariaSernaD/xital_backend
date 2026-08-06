@@ -40,9 +40,6 @@ const paymentMethodSchema = new mongoose.Schema({
       type: Boolean,
       default: true,
     },
-    cvv: {
-      type: String,
-    },//solo para colocar el campo de cvv
   },
   { timestamps: true },
 );
