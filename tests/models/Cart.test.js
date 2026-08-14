@@ -19,7 +19,10 @@ const validCart = () => ({
 });
 
 beforeAll(async () => {
-  mongoServer = await MongoMemoryServer.create();
+  //Bajo carga, mongod no siempre arranca en los 10s por defecto.
+  mongoServer = await MongoMemoryServer.create({
+    instance: { launchTimeout: 60000 },
+  });
   await mongoose.connect(mongoServer.getUri());
 });
 

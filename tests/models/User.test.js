@@ -10,7 +10,10 @@ const captureError = async (promise) =>
   promise.then(() => null, (error) => error);
 
 beforeAll(async () => {
-  mongoServer = await MongoMemoryServer.create();
+  //Bajo carga, mongod no siempre arranca en los 10s por defecto.
+  mongoServer = await MongoMemoryServer.create({
+    instance: { launchTimeout: 60000 },
+  });
   await mongoose.connect(mongoServer.getUri());
   //unique no es un validador: crea un índice. Sin esto el duplicado no falla.
   await User.init();
