@@ -10,6 +10,7 @@ import orderRoutes from "../routes/orderRoutes.js";
 import reviewsRoutes from "../routes/reviewRoutes.js";
 import cartRoutes from "../routes/cartRoutes.js";
 import logRoutes from "../routes/logRoutes.js";
+import healthRoutes from "../routes/healthRoutes.js";
 
 const router = express.Router();
 router.use("/auth", authRoutes);
@@ -23,5 +24,6 @@ router.use(orderRoutes);
 router.use(reviewsRoutes);
 router.use(cartRoutes);
 router.use(logRoutes);
+router.use(healthRoutes);
 
 export default router;
