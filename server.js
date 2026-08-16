@@ -1,18 +1,25 @@
 import cors from "cors";
 import express from "express";
+import env from "./src/config/env.config.js";
 import connectDB from "./src/config/db.config.js";
 import routes from "./src/routes/index.js";
-import dotenv from "dotenv";
-dotenv.config();
 
 //1. Conectarse a la base de datos
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = env.port;
 
-app.use(cors({
-  origin: "http://localhost:5173", 
+const corsOptions = {
+  origin(origin, callback) {
+    //Sin header Origin: Postman, curl, el healthcheck de Render o pruebas automatizadas.
+    if (!origin || env.allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error(`Origen no permitido por CORS: ${origin}`));
+  },
   credentials: true,
-}));
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
@@ -35,5 +42,5 @@ app.use((req, res) => {
 
 //3.Puerto
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT} [${env.nodeEnv}]`);
 });
